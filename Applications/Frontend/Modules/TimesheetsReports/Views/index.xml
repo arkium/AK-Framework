@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<definitions>
+	<define var="title" value="Timesheets Reports" />
+	<defineJS
+		value="Ressources/js/webix.min.js" />
+	<defineCSS
+		value="Ressources/css/webix.min.css" />
+  <defineJS
+		value="Applications/Frontend/Modules/TimesheetsReports/Views/index.js" />
+	<defineCSS
+		value="Applications/Frontend/Modules/TimesheetsReports/Views/index.css" />
+</definitions>

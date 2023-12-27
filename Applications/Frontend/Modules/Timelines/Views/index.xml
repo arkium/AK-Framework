@@ -1,0 +1,7 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<definitions>
+	<define var="title" value="Timelines" />
+
+	<defineJS value="Applications/Frontend/Modules/Timelines/Views/index.js" />
+	<defineCSS value="Applications/Frontend/Modules/Timelines/Views/index.css" />
+</definitions>

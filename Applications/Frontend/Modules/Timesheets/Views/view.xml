@@ -1,0 +1,6 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<definitions>
+	<define var="title" value="Timesheets" />
+	<defineJS value="Applications/Frontend/Modules/Timesheets/Views/view.js" />
+	<defineCSS value="Applications/Frontend/Modules/Timesheets/Views/view.css" />
+</definitions>

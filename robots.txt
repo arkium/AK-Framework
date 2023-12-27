@@ -1,0 +1,8 @@
+User-agetnt: *
+Allow: /
+Disallow: /Applications/
+Disallow: /Cli/
+Disallow: /Errors/
+Disallow: /Library/
+Disallow: /Log/
+Disallow: /Ressources/

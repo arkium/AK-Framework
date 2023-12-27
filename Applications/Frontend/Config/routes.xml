@@ -1,0 +1,118 @@
+<?xml version="1.0" encoding="iso-8859-1" ?>
+<routes>
+  <route url="*/logout" module="Connexion" action="logout" />
+  <route url="*/keepalive" module="Connexion" action="keepalive" />
+  <route url="*/timeremaining" module="Connexion" action="timeremaining" />
+
+  <route url="*/" module="Dashboard" action="index" />
+
+  <route url="*/about" module="About" action="frmAbout" />
+
+  <route url="*/users_index" module="Users" action="index" />
+  <route url="*/users/list" module="Users" action="list" />
+  <route url="*/frmuser" module="Users" action="frmUser" />
+  <route url="*/users" module="Users" action="json" />
+
+  <route url="*/usersroles_index" module="UsersRoles" action="index" />
+  <route url="*/usersroles/list" module="UsersRoles" action="list" />
+  <route url="*/frmuserrole" module="UsersRoles" action="frmUserRole" />
+  <route url="*/usersroles" module="UsersRoles" action="json" />
+
+  <route url="*/clients_index" module="Clients" action="index" />
+  <route url="*/clients/list" module="Clients" action="list" />
+  <route url="*/frmclient" module="Clients" action="frmClient" />
+  <route url="*/clients" module="Clients" action="json" />
+  <route url="*/clients_approval" module="Clients" action="approval" />
+  <route url="*/clients/list_approval" module="Clients" action="list_approval" />
+
+  <route url="*/companies_index" module="Companies" action="index" />
+  <route url="*/companies/list" module="Companies" action="list" />
+  <route url="*/frmcompany" module="Companies" action="frmCompany" />
+  <route url="*/companies" module="Companies" action="json" />
+
+  <route url="*/frmentitygroup" module="EntitiesGroups" action="frmEntityGroup" />
+  <route url="*/entitiesgroups" module="EntitiesGroups" action="json" />
+
+  <route url="*/contacts_index" module="Contacts" action="index" />
+  <route url="*/contacts/list" module="Contacts" action="list" />
+  <route url="*/contacts/form" module="Contacts" action="form" />
+  <route url="*/contacts" module="Contacts" action="json" />
+
+  <route url="*/dashboard_index" module="Dashboard" action="index" />
+  <route url="*/dashboard" module="Dashboard" action="json" />
+
+  <route url="*/taskstypes_index" module="TasksTypes" action="index" />
+  <route url="*/taskstypes/list" module="TasksTypes" action="list" />
+  <route url="*/frmtasktype" module="TasksTypes" action="frmTaskType" />
+  <route url="*/taskstypes" module="TasksTypes" action="json" />
+
+  <route url="*/frmtaskfamily" module="TasksFamilies" action="frmTaskFamily" />
+  <route url="*/tasksfamilies" module="TasksFamilies" action="json" />
+
+  <route url="*/periods_index" module="Periods" action="index" />
+  <route url="*/periods/list" module="Periods" action="list" />
+  <route url="*/frmperiod" module="Periods" action="frmPeriod" />
+  <route url="*/periods" module="Periods" action="json" />
+
+  <route url="*/tasks_index" module="Tasks" action="index" />
+  <route url="*/tasks/list" module="Tasks" action="list" />
+  <route url="*/frmtask" module="Tasks" action="frmTask" />
+  <route url="*/tasks" module="Tasks" action="json" />
+  <route url="*/tasks_approval" module="Tasks" action="approval" />
+  <route url="*/tasks/list_approval" module="Tasks" action="list_approval" />
+
+  <route url="*/tasksusers_index" module="TasksUsers" action="index" />
+  <route url="*/tasksusers/list" module="TasksUsers" action="list" />
+  <route url="*/tasksusers" module="TasksUsers" action="json" />
+
+  <route url="*/timesheetssummary_index" module="TimesheetsSummary" action="index" />
+  <route url="*/timesheetssummary/list" module="TimesheetsSummary" action="list" />
+  <route url="*/timesheetssummary/json" module="TimesheetsSummary" action="json" />
+  <route url="*/timesheetsapprove_index" module="TimesheetsApprove" action="index" />
+  <route url="*/timesheetsapprove/list" module="TimesheetsApprove" action="list" />
+  <route url="*/timesheetsapprove/json" module="TimesheetsApprove" action="json" />
+
+  <route url="*/timesheetsreports_index" module="TimesheetsReports" action="index" />
+  <route url="*/timesheetsreports/json" module="TimesheetsReports" action="json" />
+  <route url="*/timesheetsreports/cron" module="TimesheetsReports" action="cron" />
+
+  <route url="*/timesheets" module="Timesheets" action="json" />
+  <route url="*/timesheets_view" module="Timesheets" action="view" />
+  <route url="*/timesheets_edit" module="Timesheets" action="edit" />
+  <route url="*/frmtimesheet" module="Timesheets" action="frmTimesheet" />
+
+  <route url="*/timesheetshours_index" module="TimesheetsHours" action="index" />
+  <route url="*/timesheetshours/list" module="TimesheetsHours" action="list" />
+  <route url="*/frmtimesheetshours" module="TimesheetsHours" action="frmTimesheetHours" />
+  <route url="*/timesheetshours" module="TimesheetsHours" action="json" />
+  
+  <route url="*/timeclock_add" module="TimesheetsDirect" action="add" />
+  <route url="*/timeclock" module="TimesheetsDirect" action="index" />
+  <route url="*/timeclock/json" module="TimesheetsDirect" action="json" />
+
+  <route url="*/milestones_edit" module="Milestones" action="edit" />
+  <route url="*/milestones_index" module="Milestones" action="index" />
+  <route url="*/milestones/list" module="Milestones" action="list" />
+  <route url="*/milestones/form" module="Milestones" action="form" />
+  <route url="*/milestones" module="Milestones" action="json" />
+  <route url="*/milestonestypes_index" module="MilestonesTypes" action="index" />
+  <route url="*/milestonestypes/list" module="MilestonesTypes" action="list" />
+  <route url="*/milestonestypes/form" module="MilestonesTypes" action="form" />
+  <route url="*/milestonestypes" module="MilestonesTypes" action="json" />
+  <route url="*/milestonesfields/form" module="MilestonesFields" action="form" />
+  <route url="*/milestonesfields/formscript" module="MilestonesFields" action="formScript" />
+  <route url="*/milestonesfields" module="MilestonesFields" action="json" />
+
+  <route url="*/timelines_index" module="Timelines" action="index" />
+
+  <route url="*/issues_index" module="Issues" action="index" />
+  <route url="*/issues_comments" module="Issues" action="comments" />
+  <route url="*/issues/list" module="Issues" action="list" />
+  <route url="*/issues/file" module="Issues" action="file" />
+  <route url="*/issues/form" module="Issues" action="form" />
+  <route url="*/issues" module="Issues" action="json" />
+
+  <route url="*/uploads" module="Issues" action="view" />
+  <route url="*/maps" module="Maps" action="index" />
+
+</routes>

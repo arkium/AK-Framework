@@ -1,0 +1,6 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<definitions>
+	<define var="title" value="Login" />
+	<defineCSS value="Applications/Frontend/Modules/Connexion/Views/index.css" />
+	<defineJS value="Applications/Frontend/Modules/Connexion/Views/index.js" />
+</definitions>

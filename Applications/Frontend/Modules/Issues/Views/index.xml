@@ -1,0 +1,8 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<definitions>
+	<define var="title" value="Issues Log" />
+	<defineJS value="Ressources/js/arkium.dropzone.js" />
+	<defineCSS value="Ressources/css/basic.css" />
+	<defineJS value="Applications/Frontend/Modules/Issues/Views/index.js" />
+	<defineCSS value="Applications/Frontend/Modules/Issues/Views/index.css" />
+</definitions>

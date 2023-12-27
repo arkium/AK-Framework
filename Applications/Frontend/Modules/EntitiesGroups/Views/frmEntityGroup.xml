@@ -1,0 +1,5 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<definitions>
+  <define var="title" value="Entities Groups" />
+  <defineJS value="Applications/Frontend/Modules/EntitiesGroups/Views/frmEntityGroup.js" />
+</definitions>

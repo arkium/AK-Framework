@@ -1,0 +1,17 @@
+@media only screen and (max-width: 800px) {
+}
+
+@media only screen and (max-width: 640px) {
+}
+
+#exemple tbody td.group {
+    background-color: #ffffff !important;
+}
+
+.table-hover > tbody > tr:hover {
+    cursor: pointer;
+}
+
+.dataTables_filter {
+    display: visible;
+}

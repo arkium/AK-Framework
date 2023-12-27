@@ -1,0 +1,7 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<definitions>
+	<define var="title" value="Issues Log" />
+	<defineJS value="Ressources/js/jsviews.js" />
+	<defineJS value="Applications/Frontend/Modules/Issues/Views/comments.js" />
+	<defineCSS value="Applications/Frontend/Modules/Issues/Views/comments.css" />
+</definitions>

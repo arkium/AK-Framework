@@ -1,0 +1,6 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<definitions>
+	<define var="title" value="Clients" />
+	<defineJS value="Applications/Frontend/Modules/Clients/Views/approval.js" />
+	<defineCSS value="Applications/Frontend/Modules/Clients/Views/approval.css" />
+</definitions>

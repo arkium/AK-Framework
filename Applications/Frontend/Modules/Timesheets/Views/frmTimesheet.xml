@@ -1,0 +1,6 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<definitions>
+	<define var="title" value="Timesheets" />
+  <defineJS value="Ressources/js/arkium.time.js" />
+	<defineJS value="Applications/Frontend/Modules/Timesheets/Views/frmTimesheet.js" />
+</definitions>

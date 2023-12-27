@@ -1,0 +1,6 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<definitions>
+	<define var="title" value="Projects" />
+	<defineJS value="Applications/Frontend/Modules/Tasks/Views/index.js" />
+	<defineCSS value="Applications/Frontend/Modules/Tasks/Views/index.css" />
+</definitions>

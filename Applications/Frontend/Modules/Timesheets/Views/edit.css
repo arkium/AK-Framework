@@ -1,0 +1,61 @@
+@media only screen and (max-width: 800px) {
+	#unseen table td:nth-child(2), #unseen table th:nth-child(2), #unseen table td:nth-child(5),
+		#unseen table th:nth-child(5) {
+		display: none;
+	}
+}
+
+@media only screen and (max-width: 640px) {
+	#unseen table td:nth-child(2), #unseen table th:nth-child(2), #unseen table td:nth-child(4),
+		#unseen table th:nth-child(4), #unseen table td:nth-child(5), #unseen table th:nth-child(5),
+		#unseen table td:nth-child(6), #unseen table th:nth-child(6) {
+		display: none;
+	}
+}
+
+#exemple thead th.week {
+	text-align: center;
+}
+
+#exemple thead th.weekend {
+	background: #ddd;
+	text-align: center;
+}
+
+#exemple tbody tr td.week {
+	text-align: center;
+}
+
+#exemple tbody tr td.weekend {
+	background: #ddd !important;
+	text-align: center;
+}
+
+#exemple tfoot th.week {
+	text-align: center;
+}
+
+#exemple tfoot th.weekend {
+	background: #ddd; /*#d0e5f5;*/
+	text-align: center;
+}
+
+#exemple tbody td.group {
+	background-color: #ffffff !important;
+}
+
+#exemple input, #exemple input.comment {
+    width: 40px;
+	margin: 0px;
+	text-align: center;
+	border: 1px inset rgb(238, 238, 238);
+	font-size: 12px;
+	line-height: 1.5;
+	border-radius: 3px;
+}
+
+#exemple input.comment {
+	cursor: pointer;
+	background: #FFFFFF url(../../../../../Ressources/images/dirty.gif)
+		no-repeat top left;
+}

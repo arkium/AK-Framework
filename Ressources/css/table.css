@@ -1,0 +1,81 @@
+.panel-filter {
+    z-index: 100;
+    position: absolute;
+}
+
+.has-error-tab {
+    color: #b94a48 !important;
+}
+
+/*
+ * Fichier CSS pour jquery.dataTables.js
+ */
+.dataTables_processing {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    width: 250px;
+    margin-top: -15px;
+    margin-left: -125px;
+    text-align: center;
+}
+
+.dataTables_wrapper label {
+    font-weight: inherit !important;
+}
+
+.dataTable th[class*=sort] {
+    cursor: pointer;
+}
+
+.table-hover > tbody > tr:hover > td, .table-hover > tbody > tr:hover > th {
+    background-color: #e7e7e7 !important; /* #e7e7e7 */
+}
+
+.dataTable > tbody > tr.even.row_selected > td, .dataTable > tbody > tr.odd.row_selected > td {
+    color: #ffffff !important; /* #a1a1a1 #171717 #428bca */
+    background-color: #a1a1a1 !important;
+}
+
+@media only screen and (min-width:400px) {
+    .dataTable th[class*=sort]:after {
+        content: "\f0dc";
+        display: inline-block;
+        float: right;
+        position: relative;
+        margin-right: 4px;
+        font-family: Icons;
+        font-size: 13px;
+        font-weight: normal;
+        color: #555;
+    }
+
+    .dataTable th[class*=sort]:hover {
+        color: #3276b1;
+    }
+
+    .dataTable th[class*=sorting_] {
+        color: #428bca;
+    }
+
+    .dataTable th.sorting_desc, .dataTable th.sorting_asc {
+    }
+
+        .dataTable th.sorting_desc:after {
+            content: "\f0dd";
+            color: #428bca;
+        }
+
+        .dataTable th.sorting_asc:after {
+            content: "\f0de";
+            color: #428bca;
+        }
+
+    .dataTable th.sorting_disabled {
+        cursor: inherit;
+    }
+
+        .dataTable th.sorting_disabled:after {
+            display: none;
+        }
+}

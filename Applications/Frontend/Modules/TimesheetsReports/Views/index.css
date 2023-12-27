@@ -1,0 +1,25 @@
+@media only screen and (max-width: 800px) {
+    #unseen table td:nth-child(2), #unseen table th:nth-child(2) {
+        display: none;
+    }
+}
+
+@media only screen and (max-width: 640px) {
+    #unseen table td:nth-child(2), #unseen table th:nth-child(2), #unseen table td:nth-child(3),
+    #unseen table th:nth-child(3), #unseen table td:nth-child(4), #unseen table th:nth-child(4),
+    #unseen table td:nth-child(6), #unseen table th:nth-child(6) {
+        display: none;
+    }
+}
+
+.parent, .parent:nth-child(odd) > td, .parent:nth-child(even) > td {
+    background: rgb(249, 250, 251) !important;
+}
+
+.group {
+    font-weight: bold;
+}
+
+.group_sum {
+    font-weight: bold;
+}

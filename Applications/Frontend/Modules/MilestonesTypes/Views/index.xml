@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<definitions>
+	<define var="title" value="Milestones Types" />
+	<defineJS value="Ressources/js/jquery.colorpicker.js" />
+	<defineJS value="Ressources/js/bootstrap-select.min.js" />
+	<defineCSS value="Ressources/css/bootstrap-select.min.css" />
+
+	<defineJS
+		value="Applications/Frontend/Modules/MilestonesTypes/Views/index.js" />
+	<defineCSS
+		value="Applications/Frontend/Modules/MilestonesTypes/Views/index.css" />
+</definitions>

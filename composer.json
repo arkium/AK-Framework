@@ -1,0 +1,9 @@
+{
+  "config": {
+    "vendor-dir": "ressources/vendors"
+  },
+  "require": {
+    "php": ">=5.3",
+    "tecnickcom/tcpdf": "6.3.5"
+  }
+}

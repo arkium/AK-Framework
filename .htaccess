@@ -1,0 +1,31 @@
+<IfModule mod_rewrite.c>
+  RewriteEngine on
+
+  # forbid access to files and folders
+  RewriteRule ^Applications/.*/Config/.*$ - [L,F]
+  RewriteRule ^Applications/.*/Templates/.*$ - [L,F]
+  RewriteRule ^Cli/.*$ - [L,F]
+  RewriteRule ^Log/.*$ - [L,F]
+  RewriteRule ^Library/.*$ - [L,F]
+
+  #	RewriteCond %{REMOTE_HOST} \.laurion\.(com|net)$ [OR]
+  #	RewriteCond %{REMOTE_HOST} \.cn$ [OR]
+  #	RewriteCond %{REMOTE_HOST} ^badhost\.baddomain\.com$ [OR]
+  #	RewriteCond %{REMOTE_ADDR} ^123\.45\.67\.12[5-9]$
+  RewriteCond %{REMOTE_HOST} \.cn$
+  RewriteRule ^.*$ - [F]
+
+  # RewriteCond %{HTTP_REFERER} !^$
+  # RewriteCond %{HTTP_REFERER} !^http://localhost/.*$ [NC]
+  # ReWriteRule .*\.(gif|png|jpe?g)$ - [F]
+
+  RewriteCond %{HTTP_REFERER} !^$
+  RewriteCond %{HTTP_REFERER} !^https://gillet.arkium.eu/.*$ [NC]
+  ReWriteRule .*\.(gif|png|jpe?g)$ - [F]
+
+  RewriteCond %{HTTPS} off
+  RewriteRule ^(.*)$ https://gillet.arkium.eu/. [R=301,L]
+
+  RewriteCond %{REQUEST_FILENAME} !-f
+  RewriteRule ^(.*)$ index.php [QSA,L]
+</IfModule>

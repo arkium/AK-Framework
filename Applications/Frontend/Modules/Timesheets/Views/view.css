@@ -1,0 +1,37 @@
+#exemple thead th.week {
+	text-align: center;
+}
+
+#exemple thead th.weekend {
+	background: #ddd;
+	text-align: center;
+}
+
+#exemple tbody tr td.week {
+	text-align: center;
+}
+
+#exemple tbody tr td.weekend {
+	background: #ddd !important;
+	text-align: center;
+}
+
+#exemple tfoot th.week {
+	text-align: center;
+}
+
+#exemple tfoot th.weekend {
+	background: #ddd; /*#d0e5f5;*/
+	text-align: center;
+}
+
+#exemple tbody td.group {
+	background-color: #ffffff !important;
+}
+
+#exemple span.comment {
+	background: url(../../../../../Ressources/images/dirty.gif) no-repeat
+		top left;
+	padding-left: 5px;
+	cursor: pointer;
+}

@@ -1,0 +1,53 @@
+﻿<?php
+defined('_KERNEL_FILE') or header('HTTP/1.0 404 Not Found');
+defined('_KERNEL_FILE') or die();
+?>
+<!DOCTYPE html>
+<html>
+<head>
+	<title>
+		<?php echo $title; ?>
+	</title>
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<meta http-equiv="content-type" content="text/html; charset=utf-8" />
+	<meta http-equiv="X-UA-Compatible" content="IE=edge" />
+	<link rel="icon" href="favicon.ico" />
+	<link rel="stylesheet" href="Ressources/css/semantic.min.css" />
+	<link rel="stylesheet" href="Ressources/css/icon.min.css">
+	<link rel="stylesheet" href="Ressources/css/table.css" />
+	<?php echo $css; ?>
+</head>
+<body>
+	<script type="text/javascript" charset="utf-8">
+		var as_token = "<?php echo $page_token; ?>";
+	</script>
+	<div id="loading" class="ui active dimmer">
+		<div class="ui text loader"><p>Thank you for your patience during the loading of the page.</p></div>
+	</div>
+	<div id="content" class="ui container" style="display: none;">
+		<?php if ($user->isAuthenticated()): ?>
+		<!-- header -->
+		<?php include('Applications/Frontend/Templates/_menu.php'); ?>
+		<?php endif; ?>
+		<!-- main -->
+		<?php echo $content; ?>
+		<?php if ($user->isAuthenticated()): ?>
+		<!-- footer -->
+		<?php include('Applications/Frontend/Templates/_footer.php'); ?>
+		<?php endif; ?>
+	</div>
+	<!-- javascript -->
+	<script type="text/javascript" src="Ressources/js/jquery.js"></script>
+	<script type="text/javascript" src="Ressources/js/semantic.min.js"></script>
+	<script type="text/javascript" src="Ressources/js/jquery.dataTables.min.js"></script>
+	<script type="text/javascript" src="Ressources/js/jquery.slimscroll.min.js"></script>
+	<script type="text/javascript" src="Ressources/js/moment.js"></script>
+	<script type="text/javascript" src="Ressources/js/arkium.js"></script>
+	<script type="text/javascript" src="Ressources/js/arkium.sessiontimeout.js"></script>
+	<script type="text/javascript" src="Ressources/js/arkium.form.js"></script>
+	<script type="text/javascript" src="Ressources/js/arkium.notify.js"></script>
+	<script type="text/javascript" src="Ressources/js/arkium.menu.js"></script>
+	<?php echo $scriptJS; ?>
+	<?php echo $js; ?>
+</body>
+</html>

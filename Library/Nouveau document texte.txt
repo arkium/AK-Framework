@@ -1,0 +1,36 @@
+define('PERM_READ', 0);
+define('PERM_WRITE', 1);
+
+class BitField {
+    private $value;
+
+    public function __construct($value=0) {
+        $this->value = $value;
+    }
+
+    public function getValue() {
+        return $this->value;
+    }
+
+    public function get($n) {
+        return ($this->value & (1 << $n)) != 0;
+    }
+
+    public function set($n, $new=true) {
+        $this->value = ($this->value & ~(1 << $n)) | ($new << $n);
+    }
+    public function clear($n) {
+        $this->set($n, false);
+    }
+}
+
+
+$bf = new BitField($user->permissions);
+
+if ($bf->get(PERM_READ)) {
+    // can read
+}
+
+$bf->set(PERM_WRITE, true);
+$user->permissions = $bf->getValue();
+$user->save();

@@ -1,0 +1,7 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<definitions>
+	<define var="title" value="Activity Type" />
+	<defineJS value="Ressources/js/jquery.colorpicker.js" />
+
+	<defineJS value="Applications/Frontend/Modules/TasksTypes/Views/frmTaskType.js" />
+</definitions>

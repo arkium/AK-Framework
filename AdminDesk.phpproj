@@ -1,0 +1,22 @@
+<Project Sdk="Devsense.Php.Sdk">
+  <PropertyGroup Label="Globals">
+    <ProjectGuid>0e0477c5-ffd1-4115-982d-a67443fc84b0</ProjectGuid>
+    <RootNamespace>AdminDesk</RootNamespace>
+    <WebRoot />
+    <RuntimeVersion>8.0</RuntimeVersion>
+    <EnvName>IISExpress</EnvName>
+    <PHPDevHostName>localhost</PHPDevHostName>
+    <PHPDevAutoPort>true</PHPDevAutoPort>
+    <PHPDevRouting />
+    <CustomXdebugPort>9003</CustomXdebugPort>
+    <DebugMappingMethod>Automatic</DebugMappingMethod>
+    <DebugPathMapping />
+    <DBGpProxyEnabled>false</DBGpProxyEnabled>
+    <DBGpProxyHost />
+    <DBGpProxyPort>9001</DBGpProxyPort>
+    <IdeKey>77371294</IdeKey>
+  </PropertyGroup>
+  <ItemGroup>
+    <Content Remove="*.tmp" />
+  </ItemGroup>
+</Project>

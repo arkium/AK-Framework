@@ -1,0 +1,8 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<definitions>
+	<define var="title" value="Activity Types" />
+	<defineJS value="Ressources/js/jquery.colorpicker.js" />
+
+	<defineJS value="Applications/Frontend/Modules/TasksTypes/Views/index.js" />
+	<defineCSS value="Applications/Frontend/Modules/TasksTypes/Views/index.css" />
+</definitions>

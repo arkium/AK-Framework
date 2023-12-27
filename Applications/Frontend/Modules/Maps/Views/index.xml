@@ -1,0 +1,8 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<definitions>
+	<define var="title" value="Maps" />
+	<defineJS value="Ressources/js/leaflet.js" />
+	<defineCSS value="Ressources/css/leaflet.css" />
+	<defineJS value="Applications/Frontend/Modules/Maps/Views/index.js" />
+	<defineCSS value="Applications/Frontend/Modules/Maps/Views/index.css" />
+</definitions>

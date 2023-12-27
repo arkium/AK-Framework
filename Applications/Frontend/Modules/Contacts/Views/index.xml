@@ -1,0 +1,6 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<definitions>
+	<define var="title" value="Contacts" />
+	<defineJS value="Applications/Frontend/Modules/Contacts/Views/index.js" />
+	<defineCSS value="Applications/Frontend/Modules/Contacts/Views/index.css" />
+</definitions>

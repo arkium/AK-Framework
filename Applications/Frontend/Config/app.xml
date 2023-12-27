@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<definitions>
+  <define var="kernelAction" value="logout,keepalive,timeremaining" />
+  <define var="loginModule" value="Connexion" />
+  <define var="loginAction" value="index" />
+  <define var="loginTries" value="3" />
+  <define var="loginBanTime" value="120" />
+  <define var="expire" value="1800" />
+  <define var="expiretoken" value="2400" />
+  <!-- changepassword = changement du mot de passe tous les 365 jours (en secondes) -->
+  <define var="changepassword" value="31536000" />
+  <!-- redirection = redirige vers la page si user et non admin -->
+  <define var="redirection" value="timeclock" />
+</definitions>

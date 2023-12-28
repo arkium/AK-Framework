@@ -15,8 +15,8 @@ class PointageAtelierController extends \Library\BackController {
 	}
 
 	public function executePDFweek() {
-        if (array_key_exists('weekPointage', $this->param))
-            $week = $this->param['weekPointage'];
+        if (array_key_exists('weekPointage', parent::$param))
+            $week = parent::$param['weekPointage'];
         else
             $week = "";
         $nbweek = (isset($week) && !empty($week)) ? $week : date('W', time());

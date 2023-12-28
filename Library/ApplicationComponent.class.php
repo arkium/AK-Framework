@@ -72,7 +72,7 @@ class ApplicationComponent {
 	 * Tableau des variables de l'application
 	 * @var array
 	 */
-	protected $param = array();
+	protected static $param = array();
 
 	/**
 	 * Liste des classes construites pour le déboguer l'application

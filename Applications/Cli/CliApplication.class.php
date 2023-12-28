@@ -27,7 +27,7 @@ EOT;
 			$controller = $this->getController($cmd);
 			if ($controller !== null) {
                 if (!empty(parent::$cli->arg[3])) {
-					$controller->param['weekPointage'] = parent::$cli->arg[3];
+					parent::$param['weekPointage'] = parent::$cli->arg[3];
                 }
 				$controller->execute();
 			} else{

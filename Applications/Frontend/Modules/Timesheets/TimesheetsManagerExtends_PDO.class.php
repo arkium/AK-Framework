@@ -261,14 +261,14 @@ class TimesheetsManagerExtends_PDO extends \Library\Models\TimesheetsManager_PDO
 	 * @return array (reponse -> true ou false, time_id -> Id du pointage)
 	 */
 	public function lastTimeDirect($id) {
-		$query = "SELECT t.time_id, th.hour_id
+        $query = "SELECT t.time_id, th.hour_id
 FROM ts_timesheets AS t
 LEFT JOIN ts_timesheets_hours AS th USING (time_id)
 WHERE user_id='" .$id. "'
 	AND th.end ='00:00:00'
 LIMIT 1";
-		$row = parent::$dao->query($query)->fetch(\PDO::FETCH_ASSOC);
-		$row['reponse'] = ($row === false) ? false : true ;
+		$result = parent::$dao->query($query)->fetch(\PDO::FETCH_ASSOC);
+		$row['reponse'] = ($result === false) ? false : true ;
 		return $row;
 	}
 

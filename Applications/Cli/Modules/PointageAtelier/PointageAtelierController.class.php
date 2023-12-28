@@ -49,7 +49,7 @@ class PointageAtelierController extends \Library\BackController {
 			h.start AS 'début pointage',
 			h.end AS 'fin pointage',
 			TIMEDIFF(h.end, h.start) AS 'durée Hrs',
-            ROUND(TIME_TO_SEC(TIMEDIFF(h.end, h.start))/3600,2) AS 'durée 100eHrs',
+            ROUND(TIME_TO_SEC(TIMEDIFF(h.end, h.start))/3600,2) AS '100eHrs',
             SEC_TO_TIME(TIME_TO_SEC(duration)) as 'total task',
 			d.total AS 'total day',
 			t.comment AS 'comment'
@@ -77,21 +77,21 @@ class PointageAtelierController extends \Library\BackController {
         font-size: 8pt;
     }
     th {
-        width: 80px;
+        width: 70px;
         color: #003300;
         background-color: #ccffcc;
     }
     th.Comment {
-        width: 350px;
+        width: 150px;
         color: #003300;
         background-color: #ccffcc;
     }
 	td {
-        width: 80px;
+        width: 70px;
         background-color: #ffffee;
     }
     td.Comment {
-        width: 350px;
+        width: 150px;
         background-color: #ffffee;
     }
 </style>
@@ -99,8 +99,9 @@ EOF;
 		$tbl .= $tableau->generateReport();
 		$PDF_HEADER_STRING = "Pointage du ". $datefrom . " au " . $dateto ." - Semaine : " . $nameweek;
 		$file = __DIR__ . "/" . $nameweek . "_pointageatelier.pdf";
-		$this->createPDF($tbl, "Gillet - Pointage Atelier", $PDF_HEADER_STRING, $file);
-		echo "\nProcess is complete PDF\n";
+		$result = $this->createPDF($tbl, "Gillet - Pointage Atelier", $PDF_HEADER_STRING, $file);
+		echo "\nProcess is complete PDF : ";
+		echo (empty($result)) ? "OK - saved" : $result ;
 
 		$email = new \Library\Email();
 		$email->setfrom(FROM_EMAIL);
@@ -109,8 +110,9 @@ EOF;
 		$email->setFilePathMessage(DIRCLI_TPL_EMAIL . 'pointageatelier.html');
 //		$email->destinationEmail = 't.gillet@gilletvertigo.com, info@gilletvertigo.com, technics@gilletvertigo.com, paulo.ferreira@arkium.eu';
 		$email->destinationEmail = 'paulo.ferreira@arkium.eu';
-		$email->sendEmail();
-		echo "\nProcess is complete Email\n";
+		$result = $email->sendEmail();
+		echo "\nProcess is complete Email : ";
+		echo ($result) ? "OK sended" : "NOK - not sended" ;
 	}
 
 	public function executeHelp() {
@@ -168,12 +170,13 @@ EOT;
 		}
 
 		$pdf->AddPage('L', 'A4');
-		//$pdf->SetFont('helvetica', 'B', 20);
+        //$pdf->AddPage();
+        //$pdf->SetFont('helvetica', 'B', 20);
 		//$pdf->Write(0, 'Pointage atelier', '', 0, 'L', true, 0, false, false, 0);
 		$pdf->SetFont('helvetica', '', 8);
 
 		$pdf->writeHTML($tbl, true, false, false, false, '');
 
-		$pdf->Output($FILE, 'F');
+		return $pdf->Output($FILE, 'F');
 	}
 }

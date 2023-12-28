@@ -3498,9 +3498,9 @@ class TCPDF {
 			if ($this->getRTL()) {
 				$header_x = $this->original_rMargin + ($headerdata['logo_width'] * 1.1);
 			} else {
-				$header_x = $this->original_lMargin + ($headerdata['logo_width'] * 1.1);
+				$header_x = $this->original_lMargin + ((float)$headerdata['logo_width'] * 1.1);
 			}
-			$cw = $this->w - $this->original_lMargin - $this->original_rMargin - ($headerdata['logo_width'] * 1.1);
+			$cw = $this->w - $this->original_lMargin - $this->original_rMargin - ((float)$headerdata['logo_width'] * 1.1);
 			$this->setTextColorArray($this->header_text_color);
 			// header title
 			$this->setFont($headerfont[0], 'B', $headerfont[2] + 1);

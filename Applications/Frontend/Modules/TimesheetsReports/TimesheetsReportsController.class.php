@@ -10,9 +10,9 @@ class TimesheetsReportsController extends \Library\BackController {
 		parent::$param['timesheet_reports'][] = array('id' => '1', 'value' => 'Activités par clients');
 		parent::$param['timesheet_reports'][] = array('id' => '2', 'value' => 'Activités facturables');
 		parent::$param['timesheet_reports'][] = array('id' => '3', 'value' => 'Activités par utilisateurs');
-		parent::$param['timesheet_reports'][] = array('id' => '4', 'value' => 'Activités non facturable');
+		//parent::$param['timesheet_reports'][] = array('id' => '4', 'value' => 'Activités non facturable');
 		parent::$param['timesheet_reports'][] = array('id' => '5', 'value' => 'Pointage en atelier');
-		parent::$param['timesheet_reports'][] = array('id' => '6', 'value' => 'Heures par activités et utilisateurs');
+		//parent::$param['timesheet_reports'][] = array('id' => '6', 'value' => 'Heures par activités et utilisateurs');
 
 	}
 
@@ -114,7 +114,7 @@ class TimesheetsReportsController extends \Library\BackController {
 			t.task_id AS task_id,
 			CONCAT(tt.code, ' - ', tt.name) AS type,
 			CONCAT(ts.code, ' - ', ts.name) AS code,
-			ROUND(SUM(TIME_TO_SEC(duration)/3600),2) AS time,
+			ROUND(SUM(TIME_TO_SEC(t.duration)/3600),2) AS time,
 			ts.note AS comment
 		FROM ts_timesheets AS t, ts_tasks AS ts, ts_tasks_types AS tt, ts_entities AS e
 		WHERE
@@ -148,17 +148,14 @@ class TimesheetsReportsController extends \Library\BackController {
 			CONCAT(u.code, ' - ', u.first_name) AS user,
 			CONCAT(ts.code, ' - ', ts.name) AS code,
 			t.date AS date,
-			ROUND(SUM(TIME_TO_SEC(duration)/3600),2) AS time,
-			ANY_VALUE(t.comment) AS comment
-		FROM ts_timesheets AS t, ts_tasks AS ts, ts_tasks_types AS tt, ts_entities AS e, ts_users AS u
+			ROUND(TIME_TO_SEC(t.duration)/3600,2) AS time,
+			t.comment AS comment
+		FROM ts_timesheets AS t, ts_tasks AS ts, ts_users AS u
 		WHERE
 			t.task_id=ts.task_id
-			AND ts.task_type_id=tt.task_type_id
-			AND ts.customer_id=e.entity_id
 			AND t.user_id=u.user_id
 			$date_filter
-		GROUP BY ts.code, u.code, t.date
-		ORDER BY u.code, e.code, ts.code";
+		ORDER BY t.date DESC, u.code ASC, ts.code ASC";
 
 		$result = parent::$dao->query($query);
 		$output['database'] = $result->fetchAll(\PDO::FETCH_ASSOC);
@@ -167,7 +164,7 @@ class TimesheetsReportsController extends \Library\BackController {
 				{id:"task_id", header:"Id", hidden:true},
 				{id:"user", header:"Utilisateur", sort:"string_strict", adjust:"data"},
 				{id:"code", header:"Véhicule", sort:"string_strict", adjust:"data"},
-				{id:"date", header:"Date du pointage", width:200},
+				{id:"date", header:"Date du pointage", sort:"string_strict", width:200},
 				{id:"time", header:"Durée des pointages", width:200},
 				{id:"comment", header:"Commentaire", width: 350}
 			]';
@@ -212,16 +209,19 @@ class TimesheetsReportsController extends \Library\BackController {
 		// Détails des pointages en atelier
 		$query = "
 		SELECT
-			ANY_VALUE(t.time_id) AS time_id,
-			ANY_VALUE(t.task_id) AS task_id,
-			CONCAT(ANY_VALUE(u.code), ' - ', ANY_VALUE(u.first_name)) AS user,
-			ANY_VALUE(p.code) AS vehicule,
-			ANY_VALUE(t.date) AS 'date pointage',
-			ANY_VALUE(h.start) AS 'début pointage',
-			ANY_VALUE(h.end) AS 'fin pointage',
-			TIMEDIFF(ANY_VALUE(h.end), ANY_VALUE(h.start)) AS 'durée pointage',
-			ANY_VALUE(d.total) AS 'total du jour',
-			ANY_VALUE(t.comment) AS 'comment'
+			h.hour_id AS hour_id,
+            t.time_id AS time_id,
+			t.task_id AS task_id,
+			CONCAT(u.code, ' - ', u.first_name) AS user,
+			p.code AS vehicule,
+			t.date AS 'date pointage',
+			h.start AS 'début pointage',
+			h.end AS 'fin pointage',
+			TIMEDIFF(h.end, h.start) AS 'durée Hrs',
+            ROUND(TIME_TO_SEC(TIMEDIFF(h.end, h.start))/3600,2) AS 'durée 100eHrs',
+            SEC_TO_TIME(TIME_TO_SEC(duration)) as 'total task',
+			d.total AS 'total day',
+			t.comment AS 'comment'
 		FROM
 			ts_tasks AS p,
 			ts_users AS u,
@@ -241,16 +241,19 @@ class TimesheetsReportsController extends \Library\BackController {
 		$output['database'] = $result->fetchAll(\PDO::FETCH_ASSOC);
 
 		$output['colonnes'] = '[
+				{id:"hour_id", header:"hour_id", hidden:true},
 				{id:"time_id", header:"time_id", hidden:true},
 				{id:"task_id", header:"task_id", hidden:true},
-				{id:"user", header:"Utilisateur", adjust:"data"},
-				{id:"vehicule", header:"Véhicule"},
-				{id:"date pointage", header:"Date pointage"},
-				{id:"début pointage", header:"Début pointage"},
-				{id:"fin pointage", header:"Fin pointage"},
-				{id:"durée pointage", header:"Durée pointage"},
-				{id:"total du jour", header:"Total du jour"},
-				{id:"comment", header:"Commentaire", width: 350}
+				{id:"user", header:"Utilisateur", sort:"string_strict", adjust:"data"},
+				{id:"vehicule", header:"Véhicule", sort:"string_strict"},
+				{id:"date pointage", header:"Date", sort:"string_strict"},
+				{id:"début pointage", header:"Début", adjust:"data"},
+				{id:"fin pointage", header:"Fin", adjust:"data"},
+				{id:"durée Hrs", header:"Durée Hrs", adjust:"data"},
+				{id:"durée 100eHrs", header:"100e Hrs", adjust:"data"},
+				{id:"total task", header:"Ttl Activité", adjust:"data"},
+				{id:"total day", header:"Ttl Jour", adjust:"data"},
+				{id:"comment", header:"Commentaire", adjust:"data"}
 			]';
 
 		return $output;

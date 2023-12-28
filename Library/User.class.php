@@ -69,8 +69,11 @@ class User extends ApplicationComponent {
 	 * @return mixed
 	 */
 	private function cookieDecode($cookie) {
-		//$cookie = (isset($cookie)) ? $cookie : "" ;
-		return unserialize(base64_decode($cookie, false));
+        if (is_string($cookie)) {
+            return unserialize(base64_decode($cookie, false));
+        } else
+            return "";
+		//return unserialize(base64_decode($cookie, false));
 	}
 
 	/**

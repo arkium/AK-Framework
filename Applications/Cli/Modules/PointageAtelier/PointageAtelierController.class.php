@@ -5,6 +5,11 @@ use \tecnickcom\tcpdf;
 
 class PointageAtelierController extends \Library\BackController {
 
+    /**
+     * Requête SQL à traiter
+     */
+    protected $query;
+
 	public function __construct() {
 		parent::__construct();
 	}

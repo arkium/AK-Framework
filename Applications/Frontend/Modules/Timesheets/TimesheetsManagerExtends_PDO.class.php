@@ -39,11 +39,11 @@ class TimesheetsManagerExtends_PDO extends \Library\Models\TimesheetsManager_PDO
 			//	AND user_id='" . parent::$param['user_id'] . "'";
 			$query = "
 			SELECT
-				ANY_VALUE(time_id) AS time_id,
+				time_id AS time_id,
 				task_id,
 				date,
 				SEC_TO_TIME( SUM( TIME_TO_SEC( duration ) ) ) AS duration,
-				ANY_VALUE(comment) AS comment,
+				comment AS comment,
 				COUNT(*) AS count
 			FROM ts_timesheets
 			WHERE period_id='" . parent::$param['period_id'] . "'

@@ -246,13 +246,13 @@ class TimesheetsReportsController extends \Library\BackController {
 				{id:"task_id", header:"task_id", hidden:true},
 				{id:"user", header:"Utilisateur", sort:"string_strict", adjust:"data"},
 				{id:"vehicule", header:"Véhicule", sort:"string_strict"},
-				{id:"date pointage", header:"Date", sort:"string_strict"},
+				{id:"date pointage", header:"Date", sort:"string_strict", adjust:"data"},
 				{id:"début pointage", header:"Début", adjust:"data"},
 				{id:"fin pointage", header:"Fin", adjust:"data"},
-				{id:"durée Hrs", header:"Durée Hrs", adjust:"data"},
-				{id:"durée 100eHrs", header:"100e Hrs", adjust:"data"},
-				{id:"total task", header:"Ttl Activité", adjust:"data"},
-				{id:"total day", header:"Ttl Jour", adjust:"data"},
+				{id:"durée Hrs", header:"Durée", adjust:"data"},
+				{id:"durée 100eHrs", header:"100e", adjust:"data"},
+				{id:"total task", header:"Tâche", adjust:"data"},
+				{id:"total day", header:"Jour", adjust:"data"},
 				{id:"comment", header:"Commentaire", adjust:"data"}
 			]';
 

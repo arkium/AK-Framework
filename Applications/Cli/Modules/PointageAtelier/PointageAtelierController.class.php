@@ -30,18 +30,21 @@ class PointageAtelierController extends \Library\BackController {
 
 		$date_filter = " AND t.date<='" . $dateto . "' AND t.date>='" . $datefrom . "' ";
 
-		//    ANY_VALUE(t.time_id) AS time_id,
-		$this->query = "
+        $this->query = "
 		SELECT
-		    ANY_VALUE(t.task_id) AS task_id,
-		    CONCAT(ANY_VALUE(u.code), ' - ', ANY_VALUE(u.first_name)) AS user,
-		    ANY_VALUE(p.code) AS vehicule,
-		    ANY_VALUE(t.date) AS 'date pointage',
-		    ANY_VALUE(h.start) AS 'début pointage',
-		    ANY_VALUE(h.end) AS 'fin pointage',
-		    TIMEDIFF(ANY_VALUE(h.end), ANY_VALUE(h.start)) AS 'durée pointage',
-		    ANY_VALUE(d.total) AS 'total du jour',
-		    ANY_VALUE(t.comment) AS 'comment'
+			h.hour_id AS hour_id,
+            t.time_id AS time_id,
+			t.task_id AS task_id,
+			CONCAT(u.code, ' - ', u.first_name) AS user,
+			p.code AS vehicule,
+			t.date AS 'date pointage',
+			h.start AS 'début pointage',
+			h.end AS 'fin pointage',
+			TIMEDIFF(h.end, h.start) AS 'durée Hrs',
+            ROUND(TIME_TO_SEC(TIMEDIFF(h.end, h.start))/3600,2) AS 'durée 100eHrs',
+            SEC_TO_TIME(TIME_TO_SEC(duration)) as 'total task',
+			d.total AS 'total day',
+			t.comment AS 'comment'
 		FROM
 		    ts_tasks AS p,
 		    ts_users AS u,
@@ -96,8 +99,8 @@ EOF;
 		$email->setfile($file);
 		$email->subject = 'Pointage atelier du ' . $datefrom . ' au ' . $dateto ." - Semaine : " . $nameweek;
 		$email->setFilePathMessage(DIRCLI_TPL_EMAIL . 'pointageatelier.html');
-		$email->destinationEmail = 't.gillet@gilletvertigo.com, info@gilletvertigo.com, technics@gilletvertigo.com, paulo.ferreira@arkium.eu';
-//		$email->destinationEmail = 'paulo.ferreira@arkium.eu';
+//		$email->destinationEmail = 't.gillet@gilletvertigo.com, info@gilletvertigo.com, technics@gilletvertigo.com, paulo.ferreira@arkium.eu';
+		$email->destinationEmail = 'paulo.ferreira@arkium.eu';
 		$email->sendEmail();
 		echo "\nProcess is complete Email\n";
 	}

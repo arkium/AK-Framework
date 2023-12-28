@@ -52,14 +52,14 @@ class TasksUsersController extends \Library\BackController {
 		FROM (
 			SELECT
 			v.task_id,
-			ANY_VALUE(v.code) AS code,
-			ANY_VALUE(v.name) AS name,
-			ANY_VALUE(v.user_id) AS user_id,
-			ANY_VALUE(v.task_user_id) AS task_user_id";
+			v.code AS code,
+			v.name AS name,
+			v.user_id AS user_id,
+			v.task_user_id AS task_user_id";
 		if (is_array($data_user_code)) {
 			reset($data_user_code);
 			foreach ($data_user_code as $key => $val) {
-				$ini->sQuery .= ", SUM(IF(ANY_VALUE(v.user_id) = '$key', ANY_VALUE(v.nbre), 0)) AS '$val' ";
+				$ini->sQuery .= ", SUM(IF(v.user_id = '$key', v.nbre, 0)) AS '$val' ";
 			}
 		}
 		$ini->sQuery .= "

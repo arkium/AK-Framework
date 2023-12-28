@@ -83,7 +83,7 @@ class User extends ApplicationComponent {
 	public function isAuthenticated() {
 		$remember = ($this->data != false) ? $this->data['remember'] : false;
 		$expire = ($remember) ? 60 * 60 * 24 * 30 : parent::$config->get('expire'); // 30 jours si remember
-		if (isset($_SESSION['kernel_token']) && isset($_SESSION['kernel_token_time']))
+		if (isset($_SESSION['kernel_token']) && isset($_SESSION['kernel_token_time']) && is_array($this->data))
 			if ($_SESSION['kernel_token'] == $this->data['token'])
 				if ($_SESSION['kernel_token_time'] >= (time() - $expire))
 					return true;

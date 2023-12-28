@@ -3,8 +3,8 @@
     <ProjectGuid>0e0477c5-ffd1-4115-982d-a67443fc84b0</ProjectGuid>
     <RootNamespace>AdminDesk</RootNamespace>
     <WebRoot />
-    <RuntimeVersion>8.0</RuntimeVersion>
-    <EnvName>IISExpress</EnvName>
+    <RuntimeVersion>8.2</RuntimeVersion>
+    <EnvName>PHPDev</EnvName>
     <PHPDevHostName>localhost</PHPDevHostName>
     <PHPDevAutoPort>true</PHPDevAutoPort>
     <PHPDevRouting />
@@ -15,6 +15,9 @@
     <DBGpProxyHost />
     <DBGpProxyPort>9001</DBGpProxyPort>
     <IdeKey>77371294</IdeKey>
+    <SaveServerSettingsInUserFile>false</SaveServerSettingsInUserFile>
+    <IISProjectUrl>http://localhost:9003/</IISProjectUrl>
+    <IISExpressSslEnabled>false</IISExpressSslEnabled>
   </PropertyGroup>
   <ItemGroup>
     <Content Remove="*.tmp" />

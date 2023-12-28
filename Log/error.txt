@@ -397,3 +397,6 @@
 2023/12/27 20-33-00 - 2002 SQLSTATE[HY000] [2002] Aucune connexion n’a pu être établie car l’ordinateur cible l’a expressément refusée - G:\AdminDesk\Library\PDOFactory.class.php 40
 2023/12/27 20-33-02 - 2002 SQLSTATE[HY000] [2002] Aucune connexion n’a pu être établie car l’ordinateur cible l’a expressément refusée - G:\AdminDesk\Library\PDOFactory.class.php 40
 2023/12/27 20-33-10 - 2002 SQLSTATE[HY000] [2002] Aucune connexion n’a pu être établie car l’ordinateur cible l’a expressément refusée - G:\AdminDesk\Library\PDOFactory.class.php 40
+2023/12/27 20-43-33 - 1 Aucune route ne correspond à la commande : /index.php?XDEBUG_SESSION_START=77371294 - G:\AdminDesk\Library\Router.class.php 112
+2023/12/27 20-44-35 - 1 Aucune route ne correspond à la commande : /index.php - G:\AdminDesk\Library\Router.class.php 112
+2023/12/27 20-44-49 - 1 Aucune route ne correspond à la commande : /index.php?XDEBUG_SESSION_START=77371294 - G:\AdminDesk\Library\Router.class.php 112

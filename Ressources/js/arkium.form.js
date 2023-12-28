@@ -31,7 +31,8 @@ var that = this;
 		var form = $('#' + o.form);
 		var op = $('#op').prop('value');
 
-		$('select:not(".search")').dropdown();
+		// le script dropdown pose un soucis dans les select (TODO)
+		//$('select:not(".search")').dropdown();
 		$('#tab-' + o.form + ' .menu .item').tab({
 			context: $('#tab-' + o.form)
 		});

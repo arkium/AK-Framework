@@ -95,8 +95,9 @@ class Security extends ApplicationComponent {
 			throw new \Library\ArkiumException('Error ! Disable DOS Attacks');
 		if ($_SERVER['HTTP_USER_AGENT'] == '-')
 			throw new \Library\ArkiumException('Error ! Disable DOS Attacks');
-		if (stristr($_SERVER["QUERY_STRING"], '%25'))
-			throw new \Library\ArkiumException('Error ! Disable Protocole HTTP Attacks');
+		if (array_key_exists("QUERY_STRING", $_SERVER))
+			if (stristr($_SERVER["QUERY_STRING"], '%25'))
+				throw new \Library\ArkiumException('Error ! Disable Protocole HTTP Attacks');
 		// Posting from other servers in not allowed
 		if ($_SERVER["REQUEST_METHOD"] == "POST")
 			if (strlen($_SERVER["HTTP_REFERER"]) > 0)

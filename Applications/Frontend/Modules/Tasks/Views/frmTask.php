@@ -70,10 +70,10 @@ defined('_KERNEL_FILE') or die();
 					<div class="two fields">
 						<div class="field">
 							<label for="intermediate_id">Direct/Indirect:</label>
-							<select id="intermediate_id" name="intermediate_id">
-								<option value="">Select ...</option>
-								<?php echo $fct->droplist("", parent::$param['data_intermediate_id']); ?>
-							</select>
+                            <select id="intermediate_id" name="intermediate_id">
+                                <option value="">Select ...</option>
+                                <?php echo $fct->droplist("", parent::$param['data_intermediate_id']); ?>
+                            </select>
 						</div>
 						<div class="field">
 							<label for="num_proj">Number project:</label>

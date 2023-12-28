@@ -24,7 +24,7 @@ abstract class BackController extends ApplicationComponent {
 	 * Instance de la classe \Library\Page permettant l'affichage de la page demandée
 	 * @var \Library\Page
 	 */
-	public $page;
+    public $page;
 
 	/**
 	 * Constructeur de la classe \Library\BackController

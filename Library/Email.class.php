@@ -7,7 +7,7 @@
  */
 namespace Library;
 
-define('FROM_EMAIL', 'No-Reply Gillet <gillet@arkium.eu>');
+define('FROM_EMAIL', 'No-Reply Gillet <gillet@arkium.me>');
 
 /**
  * Gestion des emails

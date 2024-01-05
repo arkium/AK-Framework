@@ -56,7 +56,7 @@ defined('_KERNEL_FILE') or die();
 				<h5>Forgot your password ?</h5>
 				<div class="field">
 					<div class="ui left icon input">
-						<input type="text" id="username" name="username" placeholder="Enter your username" autofocus />
+						<input type="text" id="username2" name="username2" placeholder="Enter your username" autofocus />
 						<i class="user icon"></i>
 					</div>
 					<span>You will receive an email with your password.</span>
@@ -83,7 +83,7 @@ defined('_KERNEL_FILE') or die();
 				<h5>Select your new password and enter it below.</h5>
 				<div class="field">
 					<div class="ui left icon input">
-						<input type="password" id="password" name="password" placeholder="New Password" autofocus />
+						<input type="password" id="password3" name="password3" placeholder="New Password" autofocus />
 						<i class="lock icon"></i>
 					</div>
 				</div>

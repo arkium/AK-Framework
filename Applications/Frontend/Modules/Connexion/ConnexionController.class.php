@@ -44,7 +44,7 @@ class ConnexionController extends \Library\BackController {
 					SELECT DISTINCT
 						user_id
 					FROM ts_users
-					WHERE username='" . $request->postData('username') . "'";
+					WHERE username='" . $request->postData('username2') . "'";
 					$row = parent::$dao->query($query)->fetch(\PDO::FETCH_ASSOC);
 
 					$output = $login->forgot($row);
@@ -60,7 +60,7 @@ class ConnexionController extends \Library\BackController {
 				} elseif ($request->postData('action') == 'change') {
 					$login->id = $request->postData('id');
 					$login->token_change = $request->postData('token_change');
-					$login->password = $request->postData('password');
+					$login->password = $request->postData('password3');
 					$login->password2 = $request->postData('password2');
 					$query = "
 					SELECT DISTINCT

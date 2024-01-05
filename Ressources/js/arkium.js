@@ -171,7 +171,8 @@ $(function () {
     }
 
 //    $(window).load(function () {
-      $(window).on("load", function () {
+//    $(window).on("load", function () {
+      $(window).ready( function () {
         $("#loading").delay(300).fadeOut(300, function () {
             $("#content").fadeIn(300);
         });

@@ -59,7 +59,7 @@ var that = this;
 		switch (op) {
 			case "view":
 			case "edit":
-				console.log("test");
+				console.log("edit");
 				$.ajax({
 					type: form.prop('method'),
 					url: form.prop('action'),

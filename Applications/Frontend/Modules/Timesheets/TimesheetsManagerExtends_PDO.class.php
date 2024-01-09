@@ -267,9 +267,14 @@ LEFT JOIN ts_timesheets_hours AS th USING (time_id)
 WHERE user_id='" .$id. "'
 	AND th.end ='00:00:00'
 LIMIT 1";
-		$result = parent::$dao->query($query)->fetch(\PDO::FETCH_ASSOC);
-		$row['reponse'] = ($result === false) ? false : true ;
-		return $row;
+        $result = parent::$dao->query($query)->fetch(\PDO::FETCH_ASSOC);
+        if (is_bool($result) === true){
+            $row['reponse'] = ($result === false) ? false : true;
+        } else {
+            $row = $result;
+            $row['reponse'] = ($row === false) ? false : true;
+        }
+        return $row;
 	}
 
 	/**

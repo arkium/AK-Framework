@@ -10,9 +10,9 @@ class TimesheetsReportsController extends \Library\BackController {
 		parent::$param['timesheet_reports'][] = array('id' => '1', 'value' => 'Activités par clients');
 		parent::$param['timesheet_reports'][] = array('id' => '2', 'value' => 'Activités facturables');
 		parent::$param['timesheet_reports'][] = array('id' => '3', 'value' => 'Activités par utilisateurs');
-		//parent::$param['timesheet_reports'][] = array('id' => '4', 'value' => 'Activités non facturable');
+		parent::$param['timesheet_reports'][] = array('id' => '4', 'value' => 'Activités non facturable');
 		parent::$param['timesheet_reports'][] = array('id' => '5', 'value' => 'Pointage en atelier');
-		//parent::$param['timesheet_reports'][] = array('id' => '6', 'value' => 'Heures par activités et utilisateurs');
+		parent::$param['timesheet_reports'][] = array('id' => '6', 'value' => 'Heures par activités et utilisateurs');
 
 	}
 
@@ -176,11 +176,11 @@ class TimesheetsReportsController extends \Library\BackController {
 		// Non-chargeable Type
 		$query = "
 		SELECT
-			ANY_VALUE(t.task_id) AS task_id,
+			MIN(t.task_id) AS task_id,
 			CONCAT(u.code, ' - ', u.first_name) AS user,
 			CONCAT(tt.code, ' - ', tt.name) AS type,
 			ROUND(SUM(TIME_TO_SEC(duration)/3600),2) AS time,
-			ANY_VALUE(t.comment) AS comment
+			MIN(t.comment) AS comment
 		FROM ts_timesheets AS t, ts_tasks AS ts, ts_tasks_types AS tt, ts_users AS u
 		WHERE
 			t.task_id=ts.task_id
@@ -271,13 +271,13 @@ class TimesheetsReportsController extends \Library\BackController {
 		}
 		$query = "
 		SELECT
-			ANY_VALUE(id) AS time_id,
+			MIN(id) AS time_id,
 			vehicule,
 			$text
 			ROUND(SUM(duree),2) AS time
 		FROM (
 			SELECT
-				ANY_VALUE(ts.task_id) AS id,
+				MIN(ts.task_id) AS id,
 				ts.code AS vehicule,
 				u.user_id AS user,
 				ROUND(SUM(TIME_TO_SEC(t.duration)/3600),2) AS duree

@@ -242,4 +242,7 @@ ModelManifest.xml
 
 # FAKE - F# Make
 .fake/
+
+# Application
 /Applications/Cli/Modules/PointageAtelier/pointageatelier.pdf
+/Log/

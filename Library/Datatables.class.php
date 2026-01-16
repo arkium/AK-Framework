@@ -91,7 +91,7 @@ class Datatables extends ApplicationComponent {
 	public function run() {
 		// Get data to display
 		if (empty($this->ini->sQuery)) {
-			$this->ini->sQuery = "SELECT SQL_CALC_FOUND_ROWS `" . str_replace(" , ", " ", implode("`, `", $this->ini->aColumnsDisplay)) . "` FROM " . $this->ini->sTable;
+			$this->ini->sQuery = "SELECT `" . str_replace(" , ", " ", implode("`, `", $this->ini->aColumnsDisplay)) . "` FROM " . $this->ini->sTable;
 		}
 		$this->ini->sQuery .= " " . $this->fWhere() . " " . $this->fOrder() . " " . $this->fLimit();
 		// Variable Output à renvoyer
@@ -126,15 +126,13 @@ class Datatables extends ApplicationComponent {
 			}
 
 			// Data set length after filtering
-			$Query = "SELECT FOUND_ROWS()";
+			$Query = "SELECT COUNT(`" . $this->ini->sIndexColumn . "`) FROM " . $this->ini->sTable . " " . $this->iWhere;
 			$result = parent::$dao->query($Query)->fetch(\PDO::FETCH_NUM);
 			$this->output['iTotalDisplayRecords'] = $result[0] + $a;
 			$this->output['sql'] = $this->ini->sQuery;
 
-			// Total data set length
-			$Query = "SELECT COUNT(`" . $this->ini->sIndexColumn . "`) FROM " . $this->ini->sTable . " " . $this->iWhere;
-			$result = parent::$dao->query($Query)->fetch(\PDO::FETCH_NUM);
-			$this->output['iTotalRecords'] = $result[0] + $a;
+			// Total data set length (same as iTotalDisplayRecords for backward compatibility)
+			$this->output['iTotalRecords'] = $this->output['iTotalDisplayRecords'];
 		} catch (\PDOException $e) {
 			$this->output['sql'] = $this->ini->sQuery;
 			$this->output['where'] = $this->ini->sWhere;

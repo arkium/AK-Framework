@@ -82,14 +82,26 @@ class TasksController extends \Library\BackController {
 			parent::$param['data_milestone_type_id']['option'][] = ($row['status'] == '0') ? 'disabled="disabled"' : '';
 		}
 
-		// Liste des utilisateurs
-		$query = "SELECT user_id, code, first_name, last_name, status FROM ts_users WHERE user_id>0 ORDER BY code";
-		$result = parent::$dao->query($query);
-		$output = $result->fetchAll();
-		foreach ($output as $row) {
-			parent::$param['data_user_id']['code'][] = $row['user_id'];
-			parent::$param['data_user_id']['name'][] = $row['code'] . ' - ' . $row['last_name'] . ', ' . $row['first_name'];
-			parent::$param['data_user_id']['option'][] = ($row['status'] == '0') ? 'disabled="disabled"' : '';
+		// Liste des utilisateurs avec cache
+		$cache = new \Library\Cache();
+		$cachedData = $cache->get('data_user_id');
+		
+		if ($cachedData !== null) {
+			// Utiliser les données du cache
+			parent::$param['data_user_id'] = $cachedData;
+		} else {
+			// Charger depuis la base de données
+			$query = "SELECT user_id, code, first_name, last_name, status FROM ts_users WHERE user_id>0 ORDER BY code";
+			$result = parent::$dao->query($query);
+			$output = $result->fetchAll();
+			parent::$param['data_user_id'] = array('code' => array(), 'name' => array(), 'option' => array());
+			foreach ($output as $row) {
+				parent::$param['data_user_id']['code'][] = $row['user_id'];
+				parent::$param['data_user_id']['name'][] = $row['code'] . ' - ' . $row['last_name'] . ', ' . $row['first_name'];
+				parent::$param['data_user_id']['option'][] = ($row['status'] == '0') ? 'disabled="disabled"' : '';
+			}
+			// Stocker en cache pour 300 secondes (5 minutes)
+			$cache->set('data_user_id', parent::$param['data_user_id'], 300);
 		}
 
 		// Liste des utilisateurs

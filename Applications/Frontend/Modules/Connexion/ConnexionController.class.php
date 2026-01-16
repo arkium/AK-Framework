@@ -52,7 +52,8 @@ class ConnexionController extends \Library\BackController {
 								$output = $login->authenticate();
 							}
 						} else {
-							// Legacy plain text password - use direct comparison
+							// Legacy plain text password - getData() loads the password and 
+							// authenticate() will compare it with $login->password_login
 							$login->getData($row);
 							$output = $login->authenticate();
 						}

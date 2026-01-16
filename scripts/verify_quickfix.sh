@@ -235,8 +235,17 @@ test_cache_file() {
     fi
     print_result "Permissions cache" "OK" "Le répertoire $CACHE_DIR est accessible en écriture"
     
-    # Calculer le hash MD5 de la clé de cache
-    local cache_key_hash=$(echo -n "$CACHE_KEY" | md5sum | awk '{print $1}')
+    # Calculer le hash MD5 de la clé de cache (compatible Linux et macOS)
+    local cache_key_hash
+    if command -v md5sum &> /dev/null; then
+        cache_key_hash=$(echo -n "$CACHE_KEY" | md5sum | awk '{print $1}')
+    elif command -v md5 &> /dev/null; then
+        cache_key_hash=$(echo -n "$CACHE_KEY" | md5)
+    else
+        print_result "MD5 command" "FAIL" "Ni md5sum ni md5 n'est disponible"
+        echo ""
+        return
+    fi
     local cache_file="${CACHE_DIR}/${cache_key_hash}.cache"
     
     # Vérifier si le fichier de cache existe

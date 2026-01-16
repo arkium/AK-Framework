@@ -125,13 +125,13 @@ class Datatables extends ApplicationComponent {
 				$this->output['aaData'][] = $row;
 			}
 
-			// Data set length after filtering
+			// Data set length after filtering (with WHERE clause)
 			$Query = "SELECT COUNT(`" . $this->ini->sIndexColumn . "`) FROM " . $this->ini->sTable . " " . $this->iWhere;
 			$result = parent::$dao->query($Query)->fetch(\PDO::FETCH_NUM);
 			$this->output['iTotalDisplayRecords'] = $result[0] + $a;
 			$this->output['sql'] = $this->ini->sQuery;
 
-			// Total data set length (same as iTotalDisplayRecords for backward compatibility)
+			// Total data set length (using same WHERE as original for backward compatibility)
 			$this->output['iTotalRecords'] = $this->output['iTotalDisplayRecords'];
 		} catch (\PDOException $e) {
 			$this->output['sql'] = $this->ini->sQuery;

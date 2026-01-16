@@ -31,7 +31,9 @@ class Cache {
 		}
 		
 		// Définir le répertoire de cache file-based
-		$this->cacheDir = getcwd() . '/var/cache/';
+		// Use __DIR__ to get the Library directory, then go up one level to application root
+		$appRoot = dirname(__DIR__);
+		$this->cacheDir = $appRoot . '/var/cache/';
 		
 		// Créer le répertoire de cache s'il n'existe pas
 		if (!$this->useApcu && !is_dir($this->cacheDir)) {

@@ -17,8 +17,18 @@ class Cache {
 	private $cacheDir;
 
 	public function __construct() {
-		// Vérifier si APCu est disponible
-		$this->useApcu = extension_loaded('apcu') && ini_get('apc.enabled');
+		// Vérifier si APCu est disponible et fonctionnel
+		$this->useApcu = extension_loaded('apcu') && ini_get('apc.enabled') && function_exists('apcu_store');
+		
+		// Test si APCu fonctionne réellement (peut échouer en CLI)
+		if ($this->useApcu) {
+			$testResult = @apcu_store('_cache_test_', 1, 1);
+			if ($testResult === false) {
+				$this->useApcu = false;
+			} else {
+				@apcu_delete('_cache_test_');
+			}
+		}
 		
 		// Définir le répertoire de cache file-based
 		$this->cacheDir = getcwd() . '/var/cache/';

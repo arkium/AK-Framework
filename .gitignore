@@ -246,3 +246,4 @@ ModelManifest.xml
 # Application
 /Applications/Cli/Modules/PointageAtelier/pointageatelier.pdf
 /Log/
+/var/cache/

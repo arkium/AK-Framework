@@ -24,7 +24,15 @@ class Cache {
 		
 		// Créer le répertoire de cache s'il n'existe pas
 		if (!$this->useApcu && !is_dir($this->cacheDir)) {
-			@mkdir($this->cacheDir, 0755, true);
+			if (!mkdir($this->cacheDir, 0755, true) && !is_dir($this->cacheDir)) {
+				// Si la création échoue et que le répertoire n'existe toujours pas, désactiver le cache
+				error_log('Cache: Unable to create cache directory: ' . $this->cacheDir);
+				// Fallback: utiliser le répertoire temporaire système
+				$this->cacheDir = sys_get_temp_dir() . '/ak-cache/';
+				if (!is_dir($this->cacheDir)) {
+					mkdir($this->cacheDir, 0755, true);
+				}
+			}
 		}
 	}
 

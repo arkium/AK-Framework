@@ -39,9 +39,10 @@ class ConnexionController extends \Library\BackController {
 					$row = $stmt->fetch(\PDO::FETCH_ASSOC);
 					
 					if ($row !== false) {
-						// Verify password using password_verify if password looks hashed, else plain comparison for backward compatibility
-						if (strpos($row['password'], '$') === 0) {
-							// Password appears to be hashed (bcrypt/argon2), use password_verify
+						// Verify password using password_get_info to detect if password is hashed
+						$passwordInfo = password_get_info($row['password']);
+						if ($passwordInfo['algo'] !== null && $passwordInfo['algo'] !== 0) {
+							// Password is hashed, use password_verify
 							if (password_verify($login->password_login, $row['password'])) {
 								$login->getData($row);
 								$output = $login->authenticate();
@@ -52,6 +53,8 @@ class ConnexionController extends \Library\BackController {
 							}
 						} else {
 							// Plain password for backward compatibility
+							// Note: This is maintained for backward compatibility with existing plain passwords
+							// Consider migrating all passwords to hashed format
 							$login->getData($row);
 							$output = $login->authenticate();
 						}

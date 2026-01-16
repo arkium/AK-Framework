@@ -240,7 +240,8 @@ test_cache_file() {
     if command -v md5sum &> /dev/null; then
         cache_key_hash=$(echo -n "$CACHE_KEY" | md5sum | awk '{print $1}')
     elif command -v md5 &> /dev/null; then
-        cache_key_hash=$(echo -n "$CACHE_KEY" | md5)
+        # macOS md5 returns "MD5 (stdin) = <hash>"
+        cache_key_hash=$(echo -n "$CACHE_KEY" | md5 | awk '{print $NF}')
     else
         print_result "MD5 command" "FAIL" "Ni md5sum ni md5 n'est disponible"
         echo ""

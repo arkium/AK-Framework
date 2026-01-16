@@ -36,8 +36,18 @@ class Cache {
 		$this->cacheDir = $appRoot . '/var/cache/';
 		
 		// Créer le répertoire de cache s'il n'existe pas
-		if (!$this->useApcu && !is_dir($this->cacheDir)) {
-			mkdir($this->cacheDir, 0755, true);
+		if (!$this->useApcu) {
+			if (!is_dir($this->cacheDir)) {
+				@mkdir($this->cacheDir, 0755, true);
+			}
+			// Vérifier que le répertoire est accessible en écriture
+			if (!is_writable($this->cacheDir)) {
+				// Fallback: utiliser le répertoire temporaire du système
+				$this->cacheDir = sys_get_temp_dir() . '/ak-framework-cache/';
+				if (!is_dir($this->cacheDir)) {
+					@mkdir($this->cacheDir, 0755, true);
+				}
+			}
 		}
 	}
 

@@ -40,8 +40,9 @@ class ConnexionController extends \Library\BackController {
 					
 					// Verify password using password_verify if password is hashed, or plain text comparison for legacy
 					if ($row !== false) {
-						// Check if password is hashed (starts with $ which indicates bcrypt/argon2)
-						if (strpos($row['password'], '$') === 0) {
+						// Check if password is hashed using password_get_info() for reliable detection
+						$passwordInfo = password_get_info($row['password']);
+						if ($passwordInfo['algo'] !== null && $passwordInfo['algo'] !== 0) {
 							// Modern hashed password - use password_verify
 							if (password_verify($login->password_login, $row['password'])) {
 								$login->getData($row);

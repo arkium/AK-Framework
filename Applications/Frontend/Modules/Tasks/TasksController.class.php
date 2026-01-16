@@ -83,13 +83,25 @@ class TasksController extends \Library\BackController {
 		}
 
 		// Liste des utilisateurs
-		$query = "SELECT user_id, code, first_name, last_name, status FROM ts_users WHERE user_id>0 ORDER BY code";
-		$result = parent::$dao->query($query);
-		$output = $result->fetchAll();
-		foreach ($output as $row) {
-			parent::$param['data_user_id']['code'][] = $row['user_id'];
-			parent::$param['data_user_id']['name'][] = $row['code'] . ' - ' . $row['last_name'] . ', ' . $row['first_name'];
-			parent::$param['data_user_id']['option'][] = ($row['status'] == '0') ? 'disabled="disabled"' : '';
+		$cache = new \Library\Cache();
+		$cacheKey = 'data_user_id';
+		$cachedData = $cache->get($cacheKey);
+		
+		if ($cachedData !== null) {
+			// Utiliser les données en cache
+			parent::$param['data_user_id'] = $cachedData;
+		} else {
+			// Charger depuis la base de données
+			$query = "SELECT user_id, code, first_name, last_name, status FROM ts_users WHERE user_id>0 ORDER BY code";
+			$result = parent::$dao->query($query);
+			$output = $result->fetchAll();
+			foreach ($output as $row) {
+				parent::$param['data_user_id']['code'][] = $row['user_id'];
+				parent::$param['data_user_id']['name'][] = $row['code'] . ' - ' . $row['last_name'] . ', ' . $row['first_name'];
+				parent::$param['data_user_id']['option'][] = ($row['status'] == '0') ? 'disabled="disabled"' : '';
+			}
+			// Mettre en cache pour 300 secondes (5 minutes)
+			$cache->set($cacheKey, parent::$param['data_user_id'], 300);
 		}
 
 		// Liste des utilisateurs
@@ -141,7 +153,7 @@ class TasksController extends \Library\BackController {
 				'status_'
 		);
 		$ini->sQuery = "
-		SELECT SQL_CALC_FOUND_ROWS *
+		SELECT *
 		FROM (
 			SELECT
 			t.task_id,
@@ -251,7 +263,7 @@ class TasksController extends \Library\BackController {
 				'status_'
 		);
 		$ini->sQuery = "
-		SELECT SQL_CALC_FOUND_ROWS *
+		SELECT *
 		FROM (
 			SELECT
 			task_id AS input,

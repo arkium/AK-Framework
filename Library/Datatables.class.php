@@ -91,7 +91,7 @@ class Datatables extends ApplicationComponent {
 	public function run() {
 		// Get data to display
 		if (empty($this->ini->sQuery)) {
-			$this->ini->sQuery = "SELECT SQL_CALC_FOUND_ROWS `" . str_replace(" , ", " ", implode("`, `", $this->ini->aColumnsDisplay)) . "` FROM " . $this->ini->sTable;
+			$this->ini->sQuery = "SELECT `" . str_replace(" , ", " ", implode("`, `", $this->ini->aColumnsDisplay)) . "` FROM " . $this->ini->sTable;
 		}
 		$this->ini->sQuery .= " " . $this->fWhere() . " " . $this->fOrder() . " " . $this->fLimit();
 		// Variable Output à renvoyer
@@ -125,9 +125,9 @@ class Datatables extends ApplicationComponent {
 				$this->output['aaData'][] = $row;
 			}
 
-			// Data set length after filtering
-			$Query = "SELECT FOUND_ROWS()";
-			$result = parent::$dao->query($Query)->fetch(\PDO::FETCH_NUM);
+			// Data set length after filtering - use separate COUNT query instead of FOUND_ROWS()
+			$countQuery = "SELECT COUNT(`" . $this->ini->sIndexColumn . "`) FROM " . $this->ini->sTable . " " . $this->fWhere();
+			$result = parent::$dao->query($countQuery)->fetch(\PDO::FETCH_NUM);
 			$this->output['iTotalDisplayRecords'] = $result[0] + $a;
 			$this->output['sql'] = $this->ini->sQuery;
 

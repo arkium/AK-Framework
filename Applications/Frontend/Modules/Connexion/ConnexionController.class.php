@@ -28,24 +28,52 @@ class ConnexionController extends \Library\BackController {
 						u.first_name,
 						u.last_name,
 						u.update_time
-					FROM ts_users u, ts_users_roles ur
-					WHERE u.level = ur.role_id
-						AND u.username='" . $login->username_login . "'
-						AND u.status='1'
+					FROM ts_users u
+					JOIN ts_users_roles ur ON u.level = ur.role_id
+					WHERE u.username = :username
+						AND u.status = '1'
 					LIMIT 1";
-					$login->getData(parent::$dao->query($query)->fetch(\PDO::FETCH_ASSOC));
-					$output = $login->authenticate();
-					if ($output['reponse'] === true) {
-						parent::$user->permissions = parent::$user->getPermissions($output['level']);
-						$output['url'] = (parent::$user->permissions['admin']) ? '.' : parent::$config->get('redirection');
+					$stmt = parent::$dao->prepare($query);
+					$stmt->bindValue(':username', $login->username_login, \PDO::PARAM_STR);
+					$stmt->execute();
+					$row = $stmt->fetch(\PDO::FETCH_ASSOC);
+					
+					if ($row !== false) {
+						// Verify password using password_verify if password looks hashed, else plain comparison for backward compatibility
+						if (strpos($row['password'], '$') === 0) {
+							// Password appears to be hashed (bcrypt/argon2), use password_verify
+							if (password_verify($login->password_login, $row['password'])) {
+								$login->getData($row);
+								$output = $login->authenticate();
+							} else {
+								// Password verification failed
+								$login->getData(array('user_id' => null));
+								$output = $login->authenticate();
+							}
+						} else {
+							// Plain password for backward compatibility
+							$login->getData($row);
+							$output = $login->authenticate();
+						}
+						if ($output['reponse'] === true) {
+							parent::$user->permissions = parent::$user->getPermissions($output['level']);
+							$output['url'] = (parent::$user->permissions['admin']) ? '.' : parent::$config->get('redirection');
+						}
+					} else {
+						// User not found
+						$login->getData(array('user_id' => null));
+						$output = $login->authenticate();
 					}
 				} elseif ($request->postData('action') == 'forgot') {
 					$query = "
 					SELECT DISTINCT
 						user_id
 					FROM ts_users
-					WHERE username='" . $request->postData('username2') . "'";
-					$row = parent::$dao->query($query)->fetch(\PDO::FETCH_ASSOC);
+					WHERE username = :username";
+					$stmt = parent::$dao->prepare($query);
+					$stmt->bindValue(':username', $request->postData('username2'), \PDO::PARAM_STR);
+					$stmt->execute();
+					$row = $stmt->fetch(\PDO::FETCH_ASSOC);
 
 					$output = $login->forgot($row);
 					if ($output['reponse'] === true) {
@@ -67,17 +95,23 @@ class ConnexionController extends \Library\BackController {
 						user_id,
 						password
 					FROM ts_users
-					WHERE user_id='" . $login->id . "'";
-					$row = parent::$dao->query($query)->fetch(\PDO::FETCH_ASSOC);
+					WHERE user_id = :user_id";
+					$stmt = parent::$dao->prepare($query);
+					$stmt->bindValue(':user_id', $login->id, \PDO::PARAM_INT);
+					$stmt->execute();
+					$row = $stmt->fetch(\PDO::FETCH_ASSOC);
 
 					$output = $login->change($row);
 					if ($output['reponse'] === true) {
 						$query = "
 						UPDATE
 							ts_users
-						SET password='" . $login->password . "'
-						WHERE user_id='" . $login->id . "'";
-						$output['reponse'] = (parent::$dao->exec($query) !== false) ? true : 'The update of the database is not successful!<br/>Please contact your administrator.';
+						SET password = :password
+						WHERE user_id = :user_id";
+						$stmt = parent::$dao->prepare($query);
+						$stmt->bindValue(':password', $login->password, \PDO::PARAM_STR);
+						$stmt->bindValue(':user_id', $login->id, \PDO::PARAM_INT);
+						$output['reponse'] = ($stmt->execute() !== false) ? true : 'The update of the database is not successful!<br/>Please contact your administrator.';
 						if ($output['reponse'] === true) {
 							$login->getData(parent::$user->data);
 							$login->data['token'] = $login->token_change;
@@ -128,8 +162,11 @@ class ConnexionController extends \Library\BackController {
 				username,
 				password
 			FROM ts_users
-			WHERE user_id='$user_id'";
-			$data_user = parent::$dao->query($query)->fetch(\PDO::FETCH_ASSOC);
+			WHERE user_id = :user_id";
+			$stmt = parent::$dao->prepare($query);
+			$stmt->bindValue(':user_id', $user_id, \PDO::PARAM_INT);
+			$stmt->execute();
+			$data_user = $stmt->fetch(\PDO::FETCH_ASSOC);
 			$data_replace["first_name"] = $data_user['first_name'];
 			$data_replace["username"] = $data_user['username'];
 			$data_replace["password"] = $data_user['password'];
@@ -158,8 +195,11 @@ class ConnexionController extends \Library\BackController {
 				username,
 				password
 			FROM ts_users
-			WHERE user_id='$user_id'";
-			$data_user = parent::$dao->query($query)->fetch(\PDO::FETCH_ASSOC);
+			WHERE user_id = :user_id";
+			$stmt = parent::$dao->prepare($query);
+			$stmt->bindValue(':user_id', $user_id, \PDO::PARAM_INT);
+			$stmt->execute();
+			$data_user = $stmt->fetch(\PDO::FETCH_ASSOC);
 			$data_replace["first_name"] = $data_user['first_name'];
 			$data_replace["username"] = $data_user['username'];
 			$data_replace["password"] = $data_user['password'];

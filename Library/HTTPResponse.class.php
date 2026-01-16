@@ -27,11 +27,10 @@ class HTTPResponse extends ApplicationComponent {
 	 * @param array $output
 	 */
 	public function json($output) {
-		header('Content-Type: text/html; charset=utf-8');
+		header('Content-Type: application/json; charset=utf-8');
 		header('Cache-Control: no-cache, must-revalidate');
 		header('Expires: Mon, 26 Jul 1997 05:00:00 GMT');
-		header('Content-Type: application/json');
-		echo json_encode($output);
+		echo json_encode($output, JSON_UNESCAPED_UNICODE);
 		exit();
 	}
 

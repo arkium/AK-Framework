@@ -153,7 +153,7 @@ class TasksController extends \Library\BackController {
 				'status_'
 		);
 		$ini->sQuery = "
-		SELECT SQL_CALC_FOUND_ROWS *
+		SELECT *
 		FROM (
 			SELECT
 			t.task_id,
@@ -263,7 +263,7 @@ class TasksController extends \Library\BackController {
 				'status_'
 		);
 		$ini->sQuery = "
-		SELECT SQL_CALC_FOUND_ROWS *
+		SELECT *
 		FROM (
 			SELECT
 			task_id AS input,
